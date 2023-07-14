@@ -150,6 +150,7 @@ DistributionMap <- function(Record = 1) {
   dev.new()
   library(ggplot2)
   Directory <- find.package("SuspectSpecimens")
+  print(Directory)
   ShapeFile <- suppressWarnings(readOGR(dsn=Directory, layer = "County_3mile_region"))
   SpeciesToMap <- SuspectSpecies$SuspectSpecies
   print(paste("Number of suspect species: ", nrow(SuspectSpecies)))
