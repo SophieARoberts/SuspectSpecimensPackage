@@ -4,10 +4,12 @@
 \alias{DistributionMap}
 \title{Species Distribution Maps With Bryophyte Census Data}
 \usage{
-DistributionMap(Record = 1)
+DistributionMap(Record = 1, Directory)
 }
 \arguments{
 \item{Record}{The record number for the species in the data to start producing maps for. Default = 1.}
+
+\item{Directory}{Directory of shapefile}
 }
 \value{
 Plots of species distribution maps from collection data and from census catalogue data. Maps are made one from user selection in console.
@@ -16,5 +18,5 @@ Plots of species distribution maps from collection data and from census catalogu
 Produce species distribution heat maps for vice counties in Britain from the species in SuspectSpecies alongside distribution maps from census catalogue data.
 }
 \examples{
-DistributionMap()
+DistributionMap(Directory = "")
 }

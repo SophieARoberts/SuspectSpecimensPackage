@@ -133,9 +133,10 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
 #' 
 #' Produce species distribution heat maps for vice counties in Britain from the species in SuspectSpecies alongside distribution maps from census catalogue data.
 #' @param Record The record number for the species in the data to start producing maps for. Default = 1.
+#' @param Directory Directory of shapefile
 #' @return Plots of species distribution maps from collection data and from census catalogue data. Maps are made one from user selection in console.
 #' @examples
-#' DistributionMap()
+#' DistributionMap(Directory = "")
 #' @export
 #' @import tidyverse
 #' @import rgdal
@@ -146,11 +147,9 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
 #' @import ggpubr
 #' @import rgeos
 #' @import broom
-DistributionMap <- function(Record = 1) {
+DistributionMap <- function(Record = 1, Directory) {
   dev.new()
   library(ggplot2)
-  Directory <- find.package("SuspectSpecimens")
-  print(Directory)
   ShapeFile <- suppressWarnings(readOGR(dsn=Directory, layer = "County_3mile_region"))
   SpeciesToMap <- SuspectSpecies$SuspectSpecies
   print(paste("Number of suspect species: ", nrow(SuspectSpecies)))
@@ -169,31 +168,31 @@ DistributionMap <- function(Record = 1) {
       colnames(GetData)[2] <- "id"
       colnames(dataCensus)[5] <- "id"
       MapData <- suppressWarnings(tidy(ShapeFile, region = "VCNUMBER"))
-      MapData <- join(MapData, GetData, by="id")
+      MapNew <<- join(MapData, GetData, by="id")
       MapDataCensus <- join(MapData, dataCensus, by="id")
       
       MapPlot <- ggplot() +
-        suppressWarnings(geom_map(data = MapData, map = MapData,
-                 aes(map_id = id, group = group,
-                     x = long, y = lat, fill = Frequency)))+
+        suppressWarnings(geom_map(data = MapNew, map = MapNew,
+                                  aes(map_id = id, group = group,
+                                      x = long, y = lat, fill = Frequency)))+
         scale_fill_gradient(low = "darkgreen", high = "white")+
         coord_fixed(1) +
         theme(axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
         theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())+
         ggtitle(paste(SpeciesToMap, ":", Title))
-        MapPlotCensus <- ggplot() +
+      MapPlotCensus <- ggplot() +
         suppressWarnings(geom_map(data = MapDataCensus, map = MapDataCensus,
-                 aes(map_id = id, group = group,
-                     x = long, y = lat, fill = Name)))+
+                                  aes(map_id = id, group = group,
+                                      x = long, y = lat, fill = Name)))+
         scale_fill_manual(values = c("darkgreen"))+
         coord_fixed(1) +
         theme(axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
         theme(axis.title.y=element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())+
-          ggtitle("Census Data")
-
-        figure <- ggarrange(MapPlot, MapPlotCensus,
-                            ncol = 2, nrow = 1)
-        print(figure)
+        ggtitle("Census Data")
+      
+      figure <- ggarrange(MapPlot, MapPlotCensus,
+                          ncol = 2, nrow = 1)
+      print(figure)
     }
     else if (MapSpecies == "END") {
       break
@@ -203,6 +202,9 @@ DistributionMap <- function(Record = 1) {
     }
   }
 }
+
+Directory = "C:/Users/sophi/OneDrive/Documents/University/Year 3/Dissertation/SuspectSpecimensPackage"
+
 
 #' Species Distribution Maps Without Census Data
 #' 
@@ -350,5 +352,9 @@ SpecificDistributionMap <- function(RecordNumber) {
                       ncol = 2, nrow = 1)
   print(figure)
 }
+
+
+
+
 
 
