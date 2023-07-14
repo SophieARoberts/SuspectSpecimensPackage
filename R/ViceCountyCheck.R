@@ -12,13 +12,13 @@ SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
   VCTable <- table(SpecimenColumn, VCColumn)
   VCDF <- data.frame(VCTable)
   GetZeros <- !grepl("0", VCDF$Freq)
-  FilterZeros <- VCDF %>% filter(GetZeros)
-  colnames(FilterZeros)[1] <- "Specimen"
-  colnames(FilterZeros)[2] <- "ViceCounty"
-  colnames(FilterZeros)[3] <- "Frequency"
+  FilterZeros <<- VCDF %>% filter(GetZeros)
+  colnames(FilterZeros)[1] <<- "Specimen"
+  colnames(FilterZeros)[2] <<- "ViceCounty"
+  colnames(FilterZeros)[3] <<- "Frequency"
   FrequencyOne <- grepl("^1$", FilterZeros$Frequency)
-  FilterZeros <- cbind(FilterZeros, FrequencyOne)
-  FilterZeros$Specimen <- as.character(FilterZeros$Specimen)
+  FilterZeros <<- cbind(FilterZeros, FrequencyOne)
+  FilterZeros$Specimen <<- as.character(FilterZeros$Specimen)
   GetSuspectSpecies()
 }
 

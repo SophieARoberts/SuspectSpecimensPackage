@@ -44,5 +44,5 @@ SpeciestList <- function(SpecimenColumn) {
   Genus <- sapply(GenusSplit, "[", 1)
   SpecimenList <- cbind(Genus, SpecimenColumn)
   SpecimenList <- as.data.frame(SpecimenList)
-  AllSpeciestList <- SpecimenList %>% distinct()
+  AllSpeciestList <<- SpecimenList %>% distinct()
 }
