@@ -38,7 +38,6 @@ OneSpecimen <- function(SpecimenColumn) {
 #' 
 #' @noRd
 #' @import dplyr
-
 SpeciestList <- function(SpecimenColumn) {
   GenusSplit <- strsplit(SpecimenColumn, split = " ")
   Genus <- sapply(GenusSplit, "[", 1)
