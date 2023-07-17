@@ -133,7 +133,6 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
 #' 
 #' Produce species distribution heat maps for vice counties in Britain from the species in SuspectSpecies alongside distribution maps from census catalogue data.
 #' @param Record The record number for the species in the data to start producing maps for. Default = 1.
-#' @param Directory Directory of shapefile
 #' @return Plots of species distribution maps from collection data and from census catalogue data. Maps are made one from user selection in console.
 #' @examples
 #' DistributionMap(Directory = "")
@@ -147,10 +146,10 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
 #' @import ggpubr
 #' @import rgeos
 #' @import broom
-DistributionMap <- function(Record = 1, Directory) {
+DistributionMap <- function(Record = 1) {
   dev.new()
   library(ggplot2)
-  ShapeFile <- suppressWarnings(readOGR(dsn=Directory, layer = "County_3mile_region"))
+  #ShapeFile <- suppressWarnings(readOGR(dsn=Directory, layer = "County_3mile_region"))
   SpeciesToMap <- SuspectSpecies$SuspectSpecies
   print(paste("Number of suspect species: ", nrow(SuspectSpecies)))
   for (SpeciesToMap in Record:nrow(SuspectSpecies)) {
@@ -163,11 +162,12 @@ DistributionMap <- function(Record = 1, Directory) {
       SplitName <- strsplit(SpeciesName, split = " ")
       SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
       
-      GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
+      GetData <<- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
       dataCensus <- filter(Census_Catalogue_Data_2021, Census_Catalogue_Data_2021$Name == SpeciesNameSimple)
-      colnames(GetData)[2] <- "id"
+      colnames(GetData)[2] <<- "id"
+      colnames(MapData)[7] <<- "id"
       colnames(dataCensus)[5] <- "id"
-      MapData <- suppressWarnings(tidy(ShapeFile, region = "VCNUMBER"))
+      GetData$id <<- as.numeric(as.character(GetData$id))
       MapNew <<- join(MapData, GetData, by="id")
       MapDataCensus <- join(MapData, dataCensus, by="id")
       
@@ -203,8 +203,6 @@ DistributionMap <- function(Record = 1, Directory) {
   }
 }
 
-Directory = "C:/Users/sophi/OneDrive/Documents/University/Year 3/Dissertation/SuspectSpecimensPackage"
-
 
 #' Species Distribution Maps Without Census Data
 #' 
@@ -221,9 +219,6 @@ Directory = "C:/Users/sophi/OneDrive/Documents/University/Year 3/Dissertation/Su
 #' @import dplyr
 
 DistributionMapNoCensus <- function(Record = 1) {
-  system.file("County_3mile_region.shp", package = "SuspectSpecimens")
-  Directory <- find.package("SuspectSpecimens")
-  ShapeFile <- suppressWarnings(readOGR(dsn=Directory, layer="County_3mile_region"))
   SpeciesToMap <- SuspectSpecies$SuspectSpecies
   print(paste("Number of suspect species: ", nrow(SuspectSpecies)))
   for (SpeciesToMap in Record:nrow(SuspectSpecies)) {
@@ -235,11 +230,11 @@ DistributionMapNoCensus <- function(Record = 1) {
       Title <- stringi::stri_encode(SpeciesName, "UTF-8")
       GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
       colnames(GetData)[2] <- "id"
-      MapData <- suppressWarnings(tidy(ShapeFile, region = "VCNUMBER"))
-      MapData <- join(MapData, GetData, by = "id")
+      GetData$id <<- as.numeric(as.character(GetData$id))
+      MapNew <- join(MapData, GetData, by = "id")
 
       MapPlot <- ggplot() +
-        suppressWarnings(geom_map(data = MapData, map = MapData,
+        suppressWarnings(geom_map(data = MapNew, map = MapNew,
                  aes(map_id = id, group = group,
                      x = long, y = lat, fill = Frequency)))+
         scale_fill_gradient(low = "darkgreen", high = "white")+
@@ -275,16 +270,13 @@ DistributionMapNoCensus <- function(Record = 1) {
 SpecificDistributionMapNoCensus <- function(RecordNumber) {
   SpeciesName <- SuspectSpecies$SuspectSpecies[RecordNumber]
   Title <- stringi::stri_encode(SpeciesName, "UTF-8")
-  system.file("County_3mile_region.shp", package = "SuspectSpecimens")
-  Directory <- find.package("SuspectSpecimens")
-  ShapeFile <- suppressWarnings(readOGR(dsn=Directory, layer="County_3mile_region"))
   print(paste("Mapping:", RecordNumber, SpeciesName))
   GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
   colnames(GetData)[2] <- "id"
-  MapData <- suppressWarnings(tidy(ShapeFile, region="VCNUMBER"))
-  MapData <- join(MapData, GetData, by="id")
+  GetData$id <<- as.numeric(as.character(GetData$id))
+  MapNew <- join(MapData, GetData, by="id")
   MapPlot <- ggplot() +
-    suppressWarnings(geom_map(data = MapData, map = MapData,
+    suppressWarnings(geom_map(data = MapNew, map = MapNew,
              aes(map_id = id, group = group,
                  x = long, y = lat, fill = Frequency)))+
     scale_fill_gradient(low = "darkgreen", high = "white")+
@@ -316,20 +308,17 @@ SpecificDistributionMap <- function(RecordNumber) {
   SplitName <- strsplit(SpeciesName, split = " ")
   SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
   Title <- stringi::stri_encode(SpeciesName, "UTF-8")
-  system.file("County_3mile_region.shp", package = "SuspectSpecimens")
-  Directory <- find.package("SuspectSpecimens")
-  ShapeFile <- suppressWarnings(readOGR(dsn=Directory, layer="County_3mile_region"))
   print(paste("Mapping:", RecordNumber, SpeciesName))
   GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
   dataCensus <- filter(Census_Catalogue_Data_2021, Census_Catalogue_Data_2021$Name == SpeciesNameSimple)
   colnames(GetData)[2] <- "id"
   colnames(dataCensus)[5] <- "id"
-  MapData <- suppressWarnings(tidy(ShapeFile, region = "VCNUMBER"))
-  MapData <- join(MapData, GetData, by = "id")
+  GetData$id <<- as.numeric(as.character(GetData$id))
+  MapNew <- join(MapData, GetData, by = "id")
   MapDataCensus <- join(MapData, dataCensus, by = "id")
   
   MapPlot <- ggplot() +
-    suppressWarnings(geom_map(data = MapData, map = MapData,
+    suppressWarnings(geom_map(data = MapNew, map = MapNew,
              aes(map_id = id, group = group,
                 x = long, y = lat, fill = Frequency)))+
     scale_fill_gradient(low = "darkgreen", high = "white")+
@@ -352,9 +341,4 @@ SpecificDistributionMap <- function(RecordNumber) {
                       ncol = 2, nrow = 1)
   print(figure)
 }
-
-
-
-
-
 

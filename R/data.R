@@ -36,3 +36,25 @@
 #' data(Census_Catalogue_Data_2021)
 "Census_Catalogue_Data_2021"
 
+#' Biological Records Centre Watsonian Vice County Boundaries
+#' 
+#' Shapefile containing vice county boundaries for Britain.
+#' 
+#' @format A data frame with 1102774 rows and 7 variables
+#' \describe {
+#'  \item{long}{Longitude}
+#'  \item{lat}{Latitude}
+#'  \item{order}{Order}
+#'  \item{hole}{Hole}
+#'  \item{piece}{Piece}
+#'  \item{id}{ID}
+#' }
+#' 
+#' @source Biological Records Centre (https://github.com/BiologicalRecordsCentre/vice-counties)
+#' @examples
+#' data(MapData)
+"MapData"
+
+
+
+
