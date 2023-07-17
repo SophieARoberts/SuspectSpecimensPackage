@@ -7,7 +7,7 @@
 #' @examples
 #' SuspectSpeciesList(ExampleData$ScientificName, ExampleData$WatsonianViceCounty)
 #' @export
-#' @import plyr
+#' @import dplyr
 SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
   VCTable <- table(SpecimenColumn, VCColumn)
   VCDF <- data.frame(VCTable)
@@ -25,7 +25,7 @@ SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
 #' Suspect Species List
 #' 
 #' @noRd
-#' @import plyr
+#' @import dplyr
 GetSuspectSpecies <- function(FilterZeros) {
   Species <- FilterZeros$Specimen
   for (Species in FilterZeros) {
@@ -48,7 +48,7 @@ GetSuspectSpecies <- function(FilterZeros) {
 #' @examples
 #' CompareCollectionCensus(ExampleData$ScientificName, ExampleData$WatsonianViceCounty)
 #' @export
-#' @import plyr
+#' @import dplyr
 CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
   AllSpecies <- cbind(SpecimenColumn)
   AllSpecies <- as.data.frame(AllSpecies)
