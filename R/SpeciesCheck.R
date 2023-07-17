@@ -6,7 +6,7 @@
 #' @examples
 #' OneSpecies(ExampleData$ScientificName)
 #' @export
-#' @import dplyr
+#' @import plyr
 
 OneSpecies <- function(SpecimenColumn) {
   SpeciestList(SpecimenColumn)
@@ -23,7 +23,7 @@ OneSpecies <- function(SpecimenColumn) {
 #' @examples
 #' OneSpecimen(ExampleData$ScientificName)
 #' @export
-#' @import dplyr
+#' @import plyr
 
 OneSpecimen <- function(SpecimenColumn) {
   SpeciestList(SpecimenColumn)
@@ -37,7 +37,7 @@ OneSpecimen <- function(SpecimenColumn) {
 #' Species List
 #' 
 #' @noRd
-#' @import dplyr
+#' @import plyr
 SpeciestList <- function(SpecimenColumn) {
   GenusSplit <- strsplit(SpecimenColumn, split = " ")
   Genus <- sapply(GenusSplit, "[", 1)

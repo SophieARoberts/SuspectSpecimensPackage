@@ -7,7 +7,7 @@
 #' @examples
 #' SuspectSpeciesList(ExampleData$ScientificName, ExampleData$WatsonianViceCounty)
 #' @export
-#' @import dplyr
+#' @import plyr
 SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
   VCTable <- table(SpecimenColumn, VCColumn)
   VCDF <- data.frame(VCTable)
@@ -25,7 +25,7 @@ SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
 #' Suspect Species List
 #' 
 #' @noRd
-#' @import dplyr
+#' @import plyr
 GetSuspectSpecies <- function(FilterZeros) {
   Species <- FilterZeros$Specimen
   for (Species in FilterZeros) {
@@ -48,7 +48,7 @@ GetSuspectSpecies <- function(FilterZeros) {
 #' @examples
 #' CompareCollectionCensus(ExampleData$ScientificName, ExampleData$WatsonianViceCounty)
 #' @export
-#' @import dplyr
+#' @import plyr
 CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
   AllSpecies <- cbind(SpecimenColumn)
   AllSpecies <- as.data.frame(AllSpecies)
@@ -144,7 +144,6 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
 #' @import sp
 #' @import plyr
 #' @import ggpubr
-#' @import rgeos
 #' @import broom
 DistributionMap <- function(Record = 1) {
   dev.new()
@@ -216,7 +215,7 @@ DistributionMap <- function(Record = 1) {
 #' @import rgdal
 #' @import stringi
 #' @import broom
-#' @import dplyr
+#' @import plyr
 
 DistributionMapNoCensus <- function(Record = 1) {
   SpeciesToMap <- SuspectSpecies$SuspectSpecies
@@ -265,7 +264,7 @@ DistributionMapNoCensus <- function(Record = 1) {
 #' @import rgdal
 #' @import stringi
 #' @import broom
-#' @import dplyr
+#' @import plyr
 
 SpecificDistributionMapNoCensus <- function(RecordNumber) {
   SpeciesName <- SuspectSpecies$SuspectSpecies[RecordNumber]
@@ -299,7 +298,7 @@ SpecificDistributionMapNoCensus <- function(RecordNumber) {
 #' @import rgdal
 #' @import stringi
 #' @import broom
-#' @import dplyr
+#' @import plyr
 #' @import ggpubr
 
 SpecificDistributionMap <- function(RecordNumber) {

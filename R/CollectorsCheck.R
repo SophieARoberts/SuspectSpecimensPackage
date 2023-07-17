@@ -8,7 +8,7 @@
 #' @examples
 #' SpeciesCollectors(ExampleData$ScientificName, ExampleData$Collector1, ExampleData$Collector2, ExampleData$Collector3)
 #' @export
-#' @import dplyr
+#' @import plyr
 SpeciesCollectors <- function(SpecimenColumn, ...) {
   Collectors <- list(...)
   CollectorData <- data.frame(SpecimenColumn)

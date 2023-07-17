@@ -1,7 +1,7 @@
 Package: SuspectSpecimens
 Type: Package
 Title: Find Potentially Misidentified Specimens
-Version: 0.0.1.0
+Version: 0.2.0
 Depends:
     R (>= 2.10)
 LazyData: true
@@ -10,10 +10,9 @@ Imports:
   tidyverse,
   stringi,
   rgdal,
-  rgeos,
   sf,
   sp,
   plyr,
   ggpubr,
-  broom (>= 1.0.3),
+  broom,
   ggplot2
