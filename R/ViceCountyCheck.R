@@ -19,14 +19,14 @@ SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
   FrequencyOne <- grepl("^1$", FilterZeros$Frequency)
   FilterZeros <<- cbind(FilterZeros, FrequencyOne)
   FilterZeros$Specimen <<- as.character(FilterZeros$Specimen)
-  GetSuspectSpecies()
+  GetSuspectSpecies(FilterZeros)
 }
 
 #' Suspect Species List
 #' 
 #' @noRd
 #' @import dplyr
-GetSuspectSpecies <- function() {
+GetSuspectSpecies <- function(FilterZeros) {
   Species <- FilterZeros$Specimen
   for (Species in FilterZeros) {
     SuspectSpecies <<- ifelse (FilterZeros$FrequencyOne,
@@ -162,13 +162,13 @@ DistributionMap <- function(Record = 1) {
       SplitName <- strsplit(SpeciesName, split = " ")
       SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
       
-      GetData <<- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
+      GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
       dataCensus <- filter(Census_Catalogue_Data_2021, Census_Catalogue_Data_2021$Name == SpeciesNameSimple)
-      colnames(GetData)[2] <<- "id"
-      colnames(MapData)[7] <<- "id"
+      colnames(GetData)[2] <- "id"
+      colnames(MapData)[7] <- "id"
       colnames(dataCensus)[5] <- "id"
-      GetData$id <<- as.numeric(as.character(GetData$id))
-      MapNew <<- join(MapData, GetData, by="id")
+      GetData$id <- as.numeric(as.character(GetData$id))
+      MapNew <- join(MapData, GetData, by="id")
       MapDataCensus <- join(MapData, dataCensus, by="id")
       
       MapPlot <- ggplot() +
@@ -230,7 +230,7 @@ DistributionMapNoCensus <- function(Record = 1) {
       Title <- stringi::stri_encode(SpeciesName, "UTF-8")
       GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
       colnames(GetData)[2] <- "id"
-      GetData$id <<- as.numeric(as.character(GetData$id))
+      GetData$id <- as.numeric(as.character(GetData$id))
       MapNew <- join(MapData, GetData, by = "id")
 
       MapPlot <- ggplot() +
@@ -273,7 +273,7 @@ SpecificDistributionMapNoCensus <- function(RecordNumber) {
   print(paste("Mapping:", RecordNumber, SpeciesName))
   GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
   colnames(GetData)[2] <- "id"
-  GetData$id <<- as.numeric(as.character(GetData$id))
+  GetData$id <- as.numeric(as.character(GetData$id))
   MapNew <- join(MapData, GetData, by="id")
   MapPlot <- ggplot() +
     suppressWarnings(geom_map(data = MapNew, map = MapNew,
@@ -313,7 +313,7 @@ SpecificDistributionMap <- function(RecordNumber) {
   dataCensus <- filter(Census_Catalogue_Data_2021, Census_Catalogue_Data_2021$Name == SpeciesNameSimple)
   colnames(GetData)[2] <- "id"
   colnames(dataCensus)[5] <- "id"
-  GetData$id <<- as.numeric(as.character(GetData$id))
+  GetData$id <- as.numeric(as.character(GetData$id))
   MapNew <- join(MapData, GetData, by = "id")
   MapDataCensus <- join(MapData, dataCensus, by = "id")
   
