@@ -13,7 +13,6 @@ Imports:
   sf,
   sp,
   plyr,
-  dyplr,
   ggpubr,
   broom,
   ggplot2
