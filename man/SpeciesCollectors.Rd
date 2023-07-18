@@ -2,21 +2,22 @@
 % Please edit documentation in R/CollectorsCheck.R
 \name{SpeciesCollectors}
 \alias{SpeciesCollectors}
-\title{Species With One Collector}
+\title{Species and Collectors}
 \usage{
-SpeciesCollectors(SpecimenColumn, ...)
+SpeciesCollectors(SpecimenColumn, NoCollectors = 1, ...)
 }
 \arguments{
-\item{SpecimenColumn}{The column where the specimen names are located in the dataset}
+\item{SpecimenColumn}{The column where the specimen names are located in the dataset
+#' @param NoCollectors The specified number of collectors. Default is 1.}
 
 \item{...}{All the columns which contain collector names, separated by (,)}
 }
 \value{
-Dataframe OneCollector with list of species and collector name which only have one collector
+Dataframe GetCollectors with list of species and collector name for specified number of collectors.
 }
 \description{
-Get a list of species which only have one collector.
+Get a list of species which have specified number of collectors.
 }
 \examples{
-SpeciesCollectors(ExampleData$ScientificName, ExampleData$Collector1, ExampleData$Collector2, ExampleData$Collector3)
+SpeciesCollectors(ExampleData$ScientificName, ExampleData$Collector1, ExampleData$Collector2, ExampleData$Collector3, 2)
 }

@@ -61,7 +61,7 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
   
   Species <- AllSpecies$Species
   Specimen <- SimpleDF$Specimen
-  CensusSpecimen <- Census_Catalogue_Data_2021$Name
+  CensusSpecimen <- ExampleCensusData$Name
   x <- NA
   y <- NA
   VCDiff <- NA
@@ -87,10 +87,10 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
     x <- x %>% distinct()
     colnames(x)[1] <- "VC"
     
-    for (CensusSpecimen in 1:nrow(Census_Catalogue_Data_2021)) {
-      SpecimenName <- Census_Catalogue_Data_2021[CensusSpecimen, ]$Name
+    for (CensusSpecimen in 1:nrow(ExampleCensusData)) {
+      SpecimenName <- ExampleCensusData[CensusSpecimen, ]$Name
       if (SpeciesNameSimple == SpecimenName) {
-        VC <- suppressWarnings(as.numeric(Census_Catalogue_Data_2021[CensusSpecimen, ]$VC_printed))
+        VC <- suppressWarnings(as.numeric(ExampleCensusData[CensusSpecimen, ]$VC_printed))
         y[CensusSpecimen] <- VC
         Name <- SpecimenName
       }
@@ -162,7 +162,7 @@ DistributionMap <- function(Record = 1) {
       SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
       
       GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
-      dataCensus <- filter(Census_Catalogue_Data_2021, Census_Catalogue_Data_2021$Name == SpeciesNameSimple)
+      dataCensus <- filter(ExampleCensusData, ExampleCensusData$Name == SpeciesNameSimple)
       colnames(GetData)[2] <- "id"
       colnames(MapData)[7] <- "id"
       colnames(dataCensus)[5] <- "id"
@@ -309,7 +309,7 @@ SpecificDistributionMap <- function(RecordNumber) {
   Title <- stringi::stri_encode(SpeciesName, "UTF-8")
   print(paste("Mapping:", RecordNumber, SpeciesName))
   GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
-  dataCensus <- filter(Census_Catalogue_Data_2021, Census_Catalogue_Data_2021$Name == SpeciesNameSimple)
+  dataCensus <- filter(ExampleCensusData, ExampleCensusData$Name == SpeciesNameSimple)
   colnames(GetData)[2] <- "id"
   colnames(dataCensus)[5] <- "id"
   GetData$id <- as.numeric(as.character(GetData$id))

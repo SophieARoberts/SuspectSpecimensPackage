@@ -1,15 +1,15 @@
-#' Species With One Collector
+#' Species and Collectors
 #' 
-#' Get a list of species which only have one collector.
+#' Get a list of species which have specified number of collectors.
 #' @param SpecimenColumn The column where the specimen names are located in the dataset
+#' #' @param NoCollectors The specified number of collectors. Default is 1.
 #' @param ... All the columns which contain collector names, separated by (,)
-
-#' @return Dataframe OneCollector with list of species and collector name which only have one collector
+#' @return Dataframe GetCollectors with list of species and collector name for specified number of collectors.
 #' @examples
-#' SpeciesCollectors(ExampleData$ScientificName, ExampleData$Collector1, ExampleData$Collector2, ExampleData$Collector3)
+#' SpeciesCollectors(ExampleData$ScientificName, ExampleData$Collector1, ExampleData$Collector2, ExampleData$Collector3, 2)
 #' @export
 #' @import plyr
-SpeciesCollectors <- function(SpecimenColumn, ...) {
+SpeciesCollectors <- function(SpecimenColumn, NoCollectors = 1, ...) {
   Collectors <- list(...)
   CollectorData <- data.frame(SpecimenColumn)
   i <- 1
@@ -20,9 +20,9 @@ SpeciesCollectors <- function(SpecimenColumn, ...) {
   }
   N <- 1
   Species <- NA
-  Collector <- NA
-  OneCollector <<- cbind(Species, Collector)
-  OneCollector <<- as.data.frame(OneCollector)
+  Collectors <- NA
+  GetCollectors <<- cbind(Species, Collectors)
+  GetCollectors <<- as.data.frame(GetCollectors)
   OnlySpecies <- data.frame(SpecimenColumn)
   OnlySpecies <- OnlySpecies %>% distinct()
   CheckSpecies <- OnlySpecies$SpecimenColumn
@@ -49,8 +49,9 @@ SpeciesCollectors <- function(SpecimenColumn, ...) {
     RemoveBlanks <- grepl(" ", CollectorList$CollectorList)
     CollectorList <- CollectorList %>% filter(RemoveBlanks)
     CollectorListLength <- nrow(CollectorList)
-    if(CollectorListLength == 1) {
-      OneCollector[N, ] <<- list(Species, CollectorList[1,])
+    if(CollectorListLength <= NoCollectors) {
+      CollectorList <- as.list(CollectorList)
+      GetCollectors[N, ] <<- list(Species, CollectorList)
       N <- N + 1
     }
   }

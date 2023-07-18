@@ -20,7 +20,7 @@ This analysis will produce distribution maps based of which vice counties a spec
 To begin this analysis first build a list of suspect species which have a frequency of 1 for any vice county they are found in using the function `SuspectSpeciesList`:
 
 ```
-SuspectSpeciesList(MossData$ScientificName, MossData$ViceCounty)
+SuspectSpeciesList(ExampleData$ScientificName, ExampleData$ViceCounty)
 ```
 
 This function requires the arguments `SpecimenColumn` which is the column with the specimen names and `VCColumn` which is the column with the vice county number.
@@ -70,18 +70,18 @@ SpecificDistributionMap(4)
 The last function that can be used alongside the BBS census data is `CompareCollectionCensus`. This function will produce the dataframe `ViceCountyDifferences` with a list of species, the vice county that is different between your data and the census data and the closest vice county from the census data.
 
 ```
-CompareCollectionCensus(MossData$ScientificName, MossData$ViceCounty)
+CompareCollectionCensus(ExampleData$ScientificName, ExampleData$ViceCounty)
 ```
 This function requires the arguments `SpecimenColumn` which is the column with the specimen names and `VCColumn` which is the column with the vice county number.
 
 ## 2. Collectors
 
-This analysis finds species which only have one collector and creates the dataframe `OneCollector`.
+This analysis finds species which only have a specified number of collectors and creates the dataframe `GetCollectors`.
 
 ```
-SpeciesCollectors(MossData$ScientificName, MossData$Collector1, MossData$Collector2, MossData$Collector3)
+SpeciesCollectors(ExampleData$ScientificName, 3, ExampleData$Collector1, ExampleData$Collector2, ExampleData$Collector3)
 ```
-This function requires the arguments `SpecimenColumn` which is the column with the specimen names and any columns that contain collector names. *The name can either include authors or not*. Collector names should all be in the same format.
+This function requires the arguments `SpecimenColumn` and `NoCollectors` which is the column with the specimen names and the specified number of collectors (default is 1) It also requires any columns that contain collector names. *The specimen name can either include authors or not*. Collector names should all be in the same format.
 
 ## 3. Orphan Species & Specimens
 
@@ -90,14 +90,14 @@ These next two functions find genera with only one species in the data and speci
 The first function `OneSpecies` produces the dataframe `OneSpeciesList` which contains the list of genera with one species.
 
 ```
-OneSpecies(MossData$ScientificName)
+OneSpecies(ExampleData$ScientificName)
 ```
 
 The second function `OneSpecimen` produces the dataframe `OneSpecimenList` which contains the list of species with one specimen.
 
 
 ```
-OneSpecimen(MossData$ScientificName)
+OneSpecimen(ExampleData$ScientificName)
 ```
 
 Both of these function requires `SpecimenColumn` which is the column with the specimen names and any columns that contain collector names. *The name can either include authors or not*.
@@ -106,4 +106,6 @@ Both of these function requires `SpecimenColumn` which is the column with the sp
 
 The example data set `ExampleData` contains a list of moss species with example vice counties and collector names. This data set can be used with the above functions to see how they work.
 
+#### Example Census Data Set
 
+The example data set `ExampleCensusData` contains the British Bryological Society 2021 Census Catalogue. This data set is used with the functions under the title "Using British Bryological Society Census Catalogue 2021 Data" above.

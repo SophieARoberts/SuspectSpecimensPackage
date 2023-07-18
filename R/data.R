@@ -33,8 +33,8 @@
 #' 
 #' @source British Bryological Society (https://www.britishbryologicalsociety.org.uk/publications/census-catalogue/)
 #' @examples
-#' data(Census_Catalogue_Data_2021)
-"Census_Catalogue_Data_2021"
+#' data(ExampleCenusData)
+"ExampleCensusData"
 
 #' Biological Records Centre Watsonian Vice County Boundaries
 #' 
