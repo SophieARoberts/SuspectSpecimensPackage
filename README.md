@@ -51,12 +51,17 @@ SpecificDistributionMapNoCensus(4)
 
 This function requires the argument `Record` which is the record number of the species from the `SuspectSpecies` list. For example, here a distribution map for the 4th species in the list will be produced.
 
-### Using British Bryological Society Census Catalogue 2021 Data
+### Using Census Catalogue Data
 
-If you are looking at bryophyte data then a comparison between your collection data and the census data from the BBS can be produced.
-The census data can be found [here](https://www.britishbryologicalsociety.org.uk/publications/census-catalogue/). 
-Use instead the function `DistributionMap` which will produce a distribution map for your data and for the census data. This function works in the exact same way as `DistributionMapNoCensus` (see above).
-**The scientific name used in your data must be the same as that of the 2021 census**.
+If you want a comparison between your collection data and the census data which includes vice county information these can be compared by uploading a census data set:
+
+```
+UploadCensus(ExampleCensusData$Name, ExampleCensusData$VC_printed)
+```
+This function requires `CensusSpecies` which is the column with the species names in the census data and `CensusVC` which is the column with the vice county numbers in the census data.
+
+And then use instead the function `DistributionMap` which will produce a distribution map for your data and for the census data. This function works in the exact same way as `DistributionMapNoCensus` (see above).
+**The scientific name used in your data must be the same as that of the census data**.
 *The name can either include authors or not*.
 
 ```
@@ -108,4 +113,4 @@ The example data set `ExampleData` contains a list of moss species with example 
 
 #### Example Census Data Set
 
-The example data set `ExampleCensusData` contains the British Bryological Society 2021 Census Catalogue. This data set is used with the functions under the title "Using British Bryological Society Census Catalogue 2021 Data" above.
+The example data set `ExampleCensusData` contains the British Bryological Society 2021 Census Catalogue. The census data can be found [here](https://www.britishbryologicalsociety.org.uk/publications/census-catalogue/). This data set is used with the functions under the title "Using Census Catalogue Data" above.

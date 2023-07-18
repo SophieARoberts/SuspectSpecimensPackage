@@ -61,7 +61,7 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
   
   Species <- AllSpecies$Species
   Specimen <- SimpleDF$Specimen
-  CensusSpecimen <- ExampleCensusData$Name
+  CensusSpecimen <- CensusData$Name
   x <- NA
   y <- NA
   VCDiff <- NA
@@ -87,10 +87,10 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
     x <- x %>% distinct()
     colnames(x)[1] <- "VC"
     
-    for (CensusSpecimen in 1:nrow(ExampleCensusData)) {
+    for (CensusSpecimen in 1:nrow(CensusData)) {
       SpecimenName <- ExampleCensusData[CensusSpecimen, ]$Name
       if (SpeciesNameSimple == SpecimenName) {
-        VC <- suppressWarnings(as.numeric(ExampleCensusData[CensusSpecimen, ]$VC_printed))
+        VC <- suppressWarnings(as.numeric(CensusData[CensusSpecimen, ]$VC_printed))
         y[CensusSpecimen] <- VC
         Name <- SpecimenName
       }
@@ -162,10 +162,10 @@ DistributionMap <- function(Record = 1) {
       SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
       
       GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
-      dataCensus <- filter(ExampleCensusData, ExampleCensusData$Name == SpeciesNameSimple)
+      dataCensus <- filter(CensusData, CensusData$Name == SpeciesNameSimple)
       colnames(GetData)[2] <- "id"
       colnames(MapData)[7] <- "id"
-      colnames(dataCensus)[5] <- "id"
+      colnames(dataCensus)[2] <- "id"
       GetData$id <- as.numeric(as.character(GetData$id))
       MapNew <- join(MapData, GetData, by="id")
       MapDataCensus <- join(MapData, dataCensus, by="id")
@@ -309,9 +309,9 @@ SpecificDistributionMap <- function(RecordNumber) {
   Title <- stringi::stri_encode(SpeciesName, "UTF-8")
   print(paste("Mapping:", RecordNumber, SpeciesName))
   GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
-  dataCensus <- filter(ExampleCensusData, ExampleCensusData$Name == SpeciesNameSimple)
+  dataCensus <- filter(CensusData, CensusData$Name == SpeciesNameSimple)
   colnames(GetData)[2] <- "id"
-  colnames(dataCensus)[5] <- "id"
+  colnames(dataCensus)[2] <- "id"
   GetData$id <- as.numeric(as.character(GetData$id))
   MapNew <- join(MapData, GetData, by = "id")
   MapDataCensus <- join(MapData, dataCensus, by = "id")
@@ -341,3 +341,20 @@ SpecificDistributionMap <- function(RecordNumber) {
   print(figure)
 }
 
+
+
+#' Upload Census Data
+#' 
+#' Use census data for any organism that uses Watsonian Vice Counties to produce distribution maps and compare collection and census data.
+#' @param CensusSpecies The column where the species names are located in the dataset
+#' @param CensusVC The column where the vice counties are located in the dataset
+#' @return Usuable census data for distribution comparison
+#' @examples
+#' UploadCensus(ExampleCensusData$Name, ExampleCensusData$VC_printed)
+#' @export
+UploadCensus <- function(CensusSpecies, CensusVC) {
+  CensusData <<- cbind(CensusSpecies, CensusVC)
+  colnames(CensusData)[1] <<- "Name"
+  colnames(CensusData)[2] <<- "VC_printed"
+  CensusData <<- as.data.frame(CensusData)
+}
