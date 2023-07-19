@@ -4,19 +4,21 @@
 \alias{SuspectSpeciesList}
 \title{Suspect Species From Frequency}
 \usage{
-SuspectSpeciesList(SpecimenColumn, VCColumn)
+SuspectSpeciesList(SpecimenColumn, VCColumn, Freq = 1)
 }
 \arguments{
 \item{SpecimenColumn}{The column where the specimen names are located in the dataset}
 
 \item{VCColumn}{The column where the vice county is located in the dataset}
+
+\item{Freq}{The specified frequency. Default is 1.}
 }
 \value{
 Dataframe SuspectSpecies with list of suspect species
 }
 \description{
-Get list of suspect species which have a frequency of 1 for any vice county they are found in. Species which have only one specimen for a vice county could be suspicious. Also allows you to view a dataframe: FilterZeros containing the frequency for every vice county for a species.
+Get list of suspect species which have a specified frequency any vice county they are found in. Also allows you to view a dataframe: FilterZeros containing the frequency for every vice county for a species.
 }
 \examples{
-SuspectSpeciesList(ExampleData$ScientificName, ExampleData$WatsonianViceCounty)
+SuspectSpeciesList(ExampleData$ScientificName, ExampleData$WatsonianViceCounty, 2)
 }

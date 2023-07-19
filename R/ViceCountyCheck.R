@@ -1,14 +1,15 @@
 #' Suspect Species From Frequency
 #' 
-#' Get list of suspect species which have a frequency of 1 for any vice county they are found in. Species which have only one specimen for a vice county could be suspicious. Also allows you to view a dataframe: FilterZeros containing the frequency for every vice county for a species.
+#' Get list of suspect species which have a specified frequency any vice county they are found in. Also allows you to view a dataframe: FilterZeros containing the frequency for every vice county for a species.
 #' @param SpecimenColumn The column where the specimen names are located in the dataset
 #' @param VCColumn The column where the vice county is located in the dataset
+#' @param Freq The specified frequency. Default is 1.
 #' @return Dataframe SuspectSpecies with list of suspect species
 #' @examples
-#' SuspectSpeciesList(ExampleData$ScientificName, ExampleData$WatsonianViceCounty)
+#' SuspectSpeciesList(ExampleData$ScientificName, ExampleData$WatsonianViceCounty, 2)
 #' @export
 #' @import dplyr
-SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
+SuspectSpeciesList <- function(SpecimenColumn, VCColumn, Freq = 1) {
   VCTable <- table(SpecimenColumn, VCColumn)
   VCDF <- data.frame(VCTable)
   GetZeros <- !grepl("0", VCDF$Freq)
@@ -19,25 +20,31 @@ SuspectSpeciesList <- function(SpecimenColumn, VCColumn) {
   FrequencyOne <- grepl("^1$", FilterZeros$Frequency)
   FilterZeros <<- cbind(FilterZeros, FrequencyOne)
   FilterZeros$Specimen <<- as.character(FilterZeros$Specimen)
-  GetSuspectSpecies(FilterZeros)
+  GetSuspectSpecies(FilterZeros, Freq)
+  SuspectSpecies <<- SuspectSpecies %>% distinct()
+  SuspectSpecies <<- SuspectSpecies[order(SuspectSpecies$Species), ]
+  SuspectSpecies <<- as.data.frame(SuspectSpecies)
 }
 
 #' Suspect Species List
 #' 
 #' @noRd
 #' @import dplyr
-GetSuspectSpecies <- function(FilterZeros) {
-  Species <- FilterZeros$Specimen
-  for (Species in FilterZeros) {
-    SuspectSpecies <<- ifelse (FilterZeros$FrequencyOne,
-                               FilterZeros$Specimen, NA) 
+GetSuspectSpecies <- function(FilterZeros, Freq) {
+  Specimen <- FilterZeros$Specimen
+  Species <- NA
+  SuspectSpecies <- cbind(Species)
+  SuspectSpecies <<- as.data.frame(SuspectSpecies)
+  N <- 1
+  for (Specimen in 1:nrow(FilterZeros)) {
+    if(FilterZeros[Specimen, ]$Frequency <= Freq) {
+      SuspectSpecies[N, ] <<- list(FilterZeros[Specimen, ]$Specimen)
+      N <- N + 1
+    }
   }
-  SuspectSpecies <<- as.data.frame(SuspectSpecies)
-  SuspectSpecies <<- SuspectSpecies %>% distinct()
-  SuspectSpecies <<- na.omit(SuspectSpecies)
-  SuspectSpecies <<- SuspectSpecies[order(SuspectSpecies$SuspectSpecies), ]
-  SuspectSpecies <<- as.data.frame(SuspectSpecies)
 }
+
+
 
 #' Closest Vice County - Bryophytes
 #' 
