@@ -17,8 +17,6 @@ SuspectSpeciesList <- function(SpecimenColumn, VCColumn, Freq = 1) {
   colnames(FilterZeros)[1] <<- "Specimen"
   colnames(FilterZeros)[2] <<- "ViceCounty"
   colnames(FilterZeros)[3] <<- "Frequency"
-  FrequencyOne <- grepl("^1$", FilterZeros$Frequency)
-  FilterZeros <<- cbind(FilterZeros, FrequencyOne)
   FilterZeros$Specimen <<- as.character(FilterZeros$Specimen)
   GetSuspectSpecies(FilterZeros, Freq)
   SuspectSpecies <<- SuspectSpecies %>% distinct()
