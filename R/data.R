@@ -17,6 +17,49 @@
 #' data(ExampleData)
 "ExampleData"
 
+#' Example specimen dataset
+#' 
+#' Example data base from NMW Herbarium bryophyte collection where collector names have been replaced due to GDPR.
+#' 
+#' @format A data frame with 21715 rows and 29 variables
+#' \describe {
+#' \item{ACCESSION.NO.}{ACCESSION.NO.}
+#' \item{COLLECTIONNAME}{COLLECTIONNAME}
+#' \item{COLLECTORGNUMBER}{COLLECTORGNUMBER}
+#' \item{TAXONGROUP}{TAXONGROUP}
+#'  \item{SCIENTIFICNAME}{SCIENTIFICNAME}
+#'  \item{UKSI}{UKSI}
+#'  \item{SCIENTIFICNAME2}{SCIENTIFICNAME2}
+#'  \item{PREVIOUS.NAME}{PREVIOUS.NAME}
+#'  \item{PREVIOUS.NAME.NOTES}{PREVIOUS.NAME.NOTES}
+#'  \item{INDENTIFICATIONTYPE}{IDENTIFICATIONTYPE}
+#'  \item{INDENTIFIEDBY}{INDENTIFIEDBY}
+#'  \item{DATEIDENTIFIED}{DATEIDENTIFIED}
+#'  \item{LOCALITY}{LOCALITY}
+#'  \item{COUNTY}{COUNTY}
+#'  \item{WATSONIANVICECOUNTY}{WATSONIANVICECOUNTY}
+#'  \item{COUNTRY}{COUNTRY}
+#'  \item{COORDINATES1}{COORDINATES1}
+#'  \item{COORDINATES2}{COORDINATES2}
+#'  \item{COORDINATES3}{COORDINATES3}
+#'  \item{COLLECTOR1}{COLLECTOR1}
+#'  \item{COLLECTOR2}{COLLECTOR2}
+#'  \item{COLLECTOR3}{COLLECTOR3}
+#'  \item{COLLECTOR4}{COLLECTOR4}
+#'  \item{FIELDNOTES}{FIELDNOTES}
+#'  \item{VERBATUMCOLLECTINGDA}{VERBATUMCOLLECTINGDA}
+#'  \item{ATTRIBUTES1}{ATTRIBUTES1}
+#'  \item{ATTRIUBUTES2}{ATTRIUBUTES2}
+#'  \item{STATUS}{STATUS}
+#'  \item{PHYSICALDESCRIPTION}{PHYSICALDESCRIPTION}
+#' }
+#' 
+#' @source Created in house to serve as an example
+#' 
+#' @examples
+#' data(ExampleData)
+"ExampleDataFull"
+
 #' British Bryological Society Census Catalogue 2021
 #' 
 #' Census data used for producing distribution maps and finding the closest vice county to differences in specimen data

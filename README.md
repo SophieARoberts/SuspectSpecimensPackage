@@ -18,7 +18,7 @@ This analysis will produce distribution maps based on which vice counties a spec
 To begin this analysis first build a list of suspect species which have a specified frequency for any vice county they are found in using the function `SuspectSpeciesList`:
 
 ```
-SuspectSpeciesList(ExampleData$ScientificName, ExampleData$ViceCounty, 2)
+SuspectSpeciesList(ExampleDataFull$ScientificName, ExampleDataFull$ViceCounty, 2)
 ```
 
 This function requires the arguments `SpecimenColumn` which is the column with the specimen names and `VCColumn` which is the column with the vice county number.
@@ -74,7 +74,7 @@ SpecificDistributionMap(4)
 The last function that can be used alongside the census data is `CompareCollectionCensus`. This function will produce the dataframe `ViceCountyDifferences` with a list of species, the vice county that is your data but not in the census data and the closest vice county from the census data.
 
 ```
-CompareCollectionCensus(ExampleData$ScientificName, ExampleData$ViceCounty)
+CompareCollectionCensus(ExampleDataFull$ScientificName, ExampleDataFull$ViceCounty)
 ```
 This function requires the arguments `SpecimenColumn` which is the column with the specimen names and `VCColumn` which is the column with the vice county number.
 
@@ -83,7 +83,7 @@ This function requires the arguments `SpecimenColumn` which is the column with t
 This analysis finds species which only have a specified number of collectors and creates the dataframe `GetCollectors`.
 
 ```
-SpeciesCollectors(ExampleData$ScientificName, 3, ExampleData$Collector1, ExampleData$Collector2, ExampleData$Collector3)
+SpeciesCollectors(ExampleDataFull$ScientificName, 3, ExampleDataFull$Collector1, ExampleDataFull$Collector2, ExampleDataFull$Collector3, ExampleDataFull$Collector4)
 ```
 This function requires the arguments `SpecimenColumn` and `NoCollectors` which is the column with the specimen names and the specified number of collectors (default is 1) It also requires any columns that contain collector names. *The specimen name can either include authors or not*. Collector names should all be in the same format.
 
@@ -94,19 +94,21 @@ These next two functions find genera with a specified number of species in the d
 The first function `OrphanSpecies` produces the dataframe `OrphanSpeciesList` which contains the list of genera with the specified number of species.
 
 ```
-OrphanSpecies(ExampleData$ScientificName, 2)
+OrphanSpecies(ExampleDataFull$ScientificName, 2)
 ```
 
 The second function `OrphanSpecimens` produces the dataframe `OrphanSpecimenList` which contains the list of species with the specified number of specimens.
 
 
 ```
-OrphanSpecimens(ExampleData$ScientificName, 2)
+OrphanSpecimens(ExampleDataFull$ScientificName, 2)
 ```
 
 Both of these function requires `SpecimenColumn` which is the column with the specimen names and any columns that contain collector names. *The name can either include authors or not*. The argument `Freq` is the specified number of species/specimens. The default value is 1.
 
 #### Example Data Set
+
+The example data set `ExampleDataFull` represents NMW Herbarium bryophyte collection with collectors names having been changed due to GDPR. This data set can be used with the above functions to see how they work. However it is a large data set and some functions will run slower. To quickly see how functions will run with a very small made up data set use `ExampleData` below.
 
 The example data set `ExampleData` contains a list of moss species with example vice counties and collector names. This data set can be used with the above functions to see how they work.
 
