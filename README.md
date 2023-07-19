@@ -72,7 +72,7 @@ The function `SpecificDistributionMap` works also in the exact same way as `Spec
 ```
 SpecificDistributionMap(4)
 ```
-The last function that can be used alongside the BBS census data is `CompareCollectionCensus`. This function will produce the dataframe `ViceCountyDifferences` with a list of species, the vice county that is different between your data and the census data and the closest vice county from the census data.
+The last function that can be used alongside the census data is `CompareCollectionCensus`. This function will produce the dataframe `ViceCountyDifferences` with a list of species, the vice county that is your data but not in the census data and the closest vice county from the census data.
 
 ```
 CompareCollectionCensus(ExampleData$ScientificName, ExampleData$ViceCounty)

@@ -129,7 +129,7 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
   ViceCountyDifferences <<- na.omit(ViceCountyDifferences)
 }
 
-#' Species Distribution Maps With Bryophyte Census Data
+#' Species Distribution Maps With Census Data
 #' 
 #' Produce species distribution heat maps for vice counties in Britain from the species in SuspectSpecies alongside distribution maps from census catalogue data.
 #' @param Record The record number for the species in the data to start producing maps for. Default = 1.
@@ -286,7 +286,7 @@ SpecificDistributionMapNoCensus <- function(RecordNumber) {
   print(MapPlot)
 }
 
-#' Species Distribution Map By Record Number With Bryophyte Census Data
+#' Species Distribution Map By Record Number With Census Data
 #' 
 #' Produce species distribution heat map for vice counties in Britain for a specific record in SuspectSpecies alongside distribution map from census data.
 #' @param Record The record number for the species in the data to produce map for.

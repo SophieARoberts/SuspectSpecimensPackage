@@ -2,7 +2,7 @@
 % Please edit documentation in R/ViceCountyCheck.R
 \name{DistributionMap}
 \alias{DistributionMap}
-\title{Species Distribution Maps With Bryophyte Census Data}
+\title{Species Distribution Maps With Census Data}
 \usage{
 DistributionMap(Record = 1)
 }
