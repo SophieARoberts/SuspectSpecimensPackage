@@ -90,22 +90,22 @@ This function requires the arguments `SpecimenColumn` and `NoCollectors` which i
 
 ## 3. Orphan Species & Specimens
 
-These next two functions find genera with only one species in the data and species with only one specimen in the data.
+These next two functions find genera with a specified number of species in the data and species with a specified number of specimens in the data.
 
-The first function `OneSpecies` produces the dataframe `OneSpeciesList` which contains the list of genera with one species.
-
-```
-OneSpecies(ExampleData$ScientificName)
-```
-
-The second function `OneSpecimen` produces the dataframe `OneSpecimenList` which contains the list of species with one specimen.
-
+The first function `OrphanSpecies` produces the dataframe `OrphanSpeciesList` which contains the list of genera with the specified number of species.
 
 ```
-OneSpecimen(ExampleData$ScientificName)
+OrphanSpecies(ExampleData$ScientificName, 2)
 ```
 
-Both of these function requires `SpecimenColumn` which is the column with the specimen names and any columns that contain collector names. *The name can either include authors or not*.
+The second function `OrphanSpecimens` produces the dataframe `OrphanSpecimenList` which contains the list of species with the specified number of specimens.
+
+
+```
+OrphanSpecimens(ExampleData$ScientificName, 2)
+```
+
+Both of these function requires `SpecimenColumn` which is the column with the specimen names and any columns that contain collector names. *The name can either include authors or not*. The argument `Freq` is the specified number of species/specimens. The default value is 1.
 
 #### Example Data Set
 
