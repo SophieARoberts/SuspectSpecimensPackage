@@ -2,8 +2,6 @@
 
 R package to find potentially misidentified specimens using 3 analyses. The output of these analyses can be viewed by the user to determine if a specimen has been misidentified. 
 
-This R package was built to look at bryophyte specimens and to compare the collection data against that of the British Bryological Society Census Catalogue. However, the functions can also be used on any data of any species. See below for how data should be formatted.
-
 The R package can be downloaded from this repository using:
 
 ```
