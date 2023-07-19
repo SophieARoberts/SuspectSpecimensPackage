@@ -15,16 +15,17 @@ install_github("SophieARoberts/SuspectSpecimensPackage")
 
 This analysis uses **Watsonian Vice Counties** which can be found [here](https://www.brc.ac.uk/article/british-vice-counties).
 Each specimen should be assigned a vice county as a numeric (e.g. 14).
-This analysis will produce distribution maps based of which vice counties a species is found in and the frequency of specimens for each vice county. **Currently this is only for British species**.
+This analysis will produce distribution maps based on which vice counties a species is found in and the frequency of specimens for each vice county. **Currently this is only for British species**.
 
-To begin this analysis first build a list of suspect species which have a frequency of 1 for any vice county they are found in using the function `SuspectSpeciesList`:
+To begin this analysis first build a list of suspect species which have a specified frequency for any vice county they are found in using the function `SuspectSpeciesList`:
 
 ```
-SuspectSpeciesList(ExampleData$ScientificName, ExampleData$ViceCounty)
+SuspectSpeciesList(ExampleData$ScientificName, ExampleData$ViceCounty, 2)
 ```
 
 This function requires the arguments `SpecimenColumn` which is the column with the specimen names and `VCColumn` which is the column with the vice county number.
 *The name can either include authors or not*.
+The `Freq` argument is the specified frequency of a specimen in a vice county. The default is 1.
 This function will produce a dataframe `SuspectSpecies` which will include a list of species which have a frequency of 1 for any of the vice counties it is found in.
 Once this list has been made a number of different functions can be run which will produce distribution maps.
 
