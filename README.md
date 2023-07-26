@@ -27,6 +27,8 @@ The `Freq` argument is the specified frequency of a specimen in a vice county. T
 This function will produce a dataframe `SuspectSpecies` which will include a list of species which have a frequency of 1 for any of the vice counties it is found in.
 Once this list has been made a number of different functions can be run which will produce distribution maps.
 
+**Please make sure ggplot2 is available either by ticking ggplot2 in the Packages window or by running `library(ggplot2)`.**
+
 Firstly `DistributionMapNoCensus`:
 
 ```
