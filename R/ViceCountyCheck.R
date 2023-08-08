@@ -93,7 +93,7 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
     colnames(x)[1] <- "VC"
     
     for (CensusSpecimen in 1:nrow(CensusData)) {
-      SpecimenName <- ExampleCensusData[CensusSpecimen, ]$Name
+      SpecimenName <- CensusData[CensusSpecimen, ]$Name
       if (SpeciesNameSimple == SpecimenName) {
         VC <- suppressWarnings(as.numeric(CensusData[CensusSpecimen, ]$VC_printed))
         y[CensusSpecimen] <- VC

@@ -16,6 +16,7 @@ SpeciesCollectors <- function(SpecimenColumn, NoCollectors = 1, ...) {
   for (c in Collectors) {
     CollectorNumber = paste("Collector", i, sep = "")
     i <- i + 1
+    c <- stringi::stri_encode(c, "UTF-8")
     CollectorData[CollectorNumber] <- c
   }
   N <- 1
@@ -37,7 +38,7 @@ SpeciesCollectors <- function(SpecimenColumn, NoCollectors = 1, ...) {
     for (CheckSpecimen in 1:nrow(CollectorData)) {
       Specimen <- CollectorData[CheckSpecimen, "SpecimenColumn"]
       if (Specimen == Species) {
-        for(c in 2:ncol(CollectorData)) {
+        for(c in 1:ncol(CollectorData)) {
           CollectorList <- append(CollectorList, 
                                  CollectorData[c][CheckSpecimen, ])
         }

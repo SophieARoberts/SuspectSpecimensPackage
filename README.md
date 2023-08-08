@@ -79,6 +79,7 @@ The last function that can be used alongside the census data is `CompareCollecti
 CompareCollectionCensus(ExampleDataFull$SCIENTIFICNAME, ExampleDataFull$WATSONIANVICECOUNTY)
 ```
 This function requires the arguments `SpecimenColumn` which is the column with the specimen names and `VCColumn` which is the column with the vice county number.
+*Note: this function just produces a table with the differing vice counties and does not produce distribution maps.*
 
 ## 2. Collectors
 

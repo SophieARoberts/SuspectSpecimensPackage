@@ -94,4 +94,5 @@ SpeciestList <- function(SpecimenColumn) {
   SpecimenList <<- cbind(Genus, SpecimenColumn)
   SpecimenList <<- as.data.frame(SpecimenList)
   AllSpeciestList <<- SpecimenList %>% distinct()
+  AllSpeciestList <<- na.omit(AllSpeciestList)
 }

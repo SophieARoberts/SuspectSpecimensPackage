@@ -5,7 +5,7 @@
 \alias{ExampleDataFull}
 \title{Example specimen dataset}
 \format{
-A data frame with 21715 rows and 29 variables
+A data frame with 21618 rows and 29 variables
 \describe {
 \item{ACCESSION.NO.}{ACCESSION.NO.}
 \item{COLLECTIONNAME}{COLLECTIONNAME}

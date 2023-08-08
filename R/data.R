@@ -21,7 +21,7 @@
 #' 
 #' Example data base from NMW Herbarium bryophyte collection where collector names have been replaced due to GDPR.
 #' 
-#' @format A data frame with 21715 rows and 29 variables
+#' @format A data frame with 21618 rows and 29 variables
 #' \describe {
 #' \item{ACCESSION.NO.}{ACCESSION.NO.}
 #' \item{COLLECTIONNAME}{COLLECTIONNAME}
