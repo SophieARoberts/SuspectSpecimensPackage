@@ -9,7 +9,6 @@ RoxygenNote: 7.2.3
 Imports:
   tidyverse,
   stringi,
-  rgdal,
   sf,
   sp,
   plyr,

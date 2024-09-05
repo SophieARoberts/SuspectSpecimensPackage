@@ -143,7 +143,6 @@ CompareCollectionCensus <- function(SpecimenColumn, VCColumn) {
 #' DistributionMap(Directory = "")
 #' @export
 #' @import tidyverse
-#' @import rgdal
 #' @import stringi
 #' @import sf
 #' @import sp
@@ -166,14 +165,14 @@ DistributionMap <- function(Record = 1) {
       SplitName <- strsplit(SpeciesName, split = " ")
       SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
       
-      GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
-      dataCensus <- filter(CensusData, CensusData$Name == SpeciesNameSimple)
+      GetData <<- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
+      dataCensus <<- filter(CensusData, CensusData$Name == SpeciesNameSimple)
       colnames(GetData)[2] <- "id"
       colnames(MapData)[7] <- "id"
       colnames(dataCensus)[2] <- "id"
       GetData$id <- as.numeric(as.character(GetData$id))
-      MapNew <- join(MapData, GetData, by="id")
-      MapDataCensus <- join(MapData, dataCensus, by="id")
+      MapNew <<- join(MapData, GetData, by="id")
+      MapDataCensus <<- join(MapData, dataCensus, by="id")
       
       MapPlot <- ggplot() +
         suppressWarnings(geom_map(data = MapNew, map = MapNew,
@@ -217,7 +216,6 @@ DistributionMap <- function(Record = 1) {
 #' DistributionMapNoCensus()
 #' @export
 #' @import tidyverse
-#' @import rgdal
 #' @import stringi
 #' @import broom
 #' @import plyr
@@ -266,7 +264,6 @@ DistributionMapNoCensus <- function(Record = 1) {
 #' SpecificDistributionMapNoCensus(3)
 #' @export
 #' @import tidyverse
-#' @import rgdal
 #' @import stringi
 #' @import broom
 #' @import plyr
@@ -300,7 +297,6 @@ SpecificDistributionMapNoCensus <- function(RecordNumber) {
 #' SpecificDistributionMap(3)
 #' @export
 #' @import tidyverse
-#' @import rgdal
 #' @import stringi
 #' @import broom
 #' @import plyr
