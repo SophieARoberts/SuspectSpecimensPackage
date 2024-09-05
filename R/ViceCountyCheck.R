@@ -167,9 +167,9 @@ DistributionMap <- function(Record = 1) {
       
       GetData <<- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
       dataCensus <<- filter(CensusData, CensusData$Name == SpeciesNameSimple)
-      colnames(GetData)[2] <- "id"
-      colnames(MapData)[7] <- "id"
-      colnames(dataCensus)[2] <- "id"
+      colnames(GetData)[2] <<- "id"
+      colnames(MapData)[7] <<- "id"
+      colnames(dataCensus)[2] <<- "id"
       GetData$id <- as.numeric(as.character(GetData$id))
       MapNew <<- join(MapData, GetData, by="id")
       MapDataCensus <<- join(MapData, dataCensus, by="id")
