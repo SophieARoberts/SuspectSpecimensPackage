@@ -162,15 +162,16 @@ DistributionMap <- function(Record = 1) {
     if (MapSpecies == "Y") {
       print(paste("Mapping:", SpeciesName))
       Title <- stringi::stri_encode(SpeciesName, "UTF-8")
-      SplitName <- strsplit(SpeciesName, split = " ")
+      SpeciesNameCensus <- iconv(SpeciesName, from = "ISO-8859-1", to = "UTF-8")
+      SplitName <- strsplit(SpeciesNameCensus, split = " ")
       SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
       
       GetData <<- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
       dataCensus <<- filter(CensusData, CensusData$Name == SpeciesNameSimple)
-      colnames(GetData)[2] <- "id"
-      colnames(MapData)[7] <- "id"
+      colnames(GetData)[2] <<- "id"
+      colnames(MapData)[7] <<- "id"
       colnames(dataCensus)[2] <<- "id"
-      GetData$id <- as.numeric(as.character(GetData$id))
+      #GetData$id <- as.numeric(as.character(GetData$id))
       MapNew <<- join(MapData, GetData, by="id")
       MapDataCensus <<- join(MapData, dataCensus, by="id")
       
@@ -305,17 +306,18 @@ SpecificDistributionMapNoCensus <- function(RecordNumber) {
 SpecificDistributionMap <- function(RecordNumber) {
   dev.new()
   SpeciesName <- SuspectSpecies$SuspectSpecies[RecordNumber]
-  SplitName <- strsplit(SpeciesName, split = " ")
+  SpeciesNameCensus <- iconv(SpeciesName, from = "ISO-8859-1", to = "UTF-8")
+  SplitName <- strsplit(SpeciesNameCensus, split = " ")
   SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
   Title <- stringi::stri_encode(SpeciesName, "UTF-8")
   print(paste("Mapping:", RecordNumber, SpeciesName))
   GetData <- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
-  dataCensus <- filter(CensusData, CensusData$Name == SpeciesNameSimple)
+  dataCensus <<- filter(CensusData, CensusData$Name == SpeciesNameSimple)
   colnames(GetData)[2] <- "id"
   colnames(dataCensus)[2] <- "id"
   GetData$id <- as.numeric(as.character(GetData$id))
-  MapNew <- join(MapData, GetData, by = "id")
-  MapDataCensus <- join(MapData, dataCensus, by = "id")
+  MapNew <<- join(MapData, GetData, by = "id")
+  MapDataCensus <<- join(MapData, dataCensus, by = "id")
   
   MapPlot <- ggplot() +
     suppressWarnings(geom_map(data = MapNew, map = MapNew,
