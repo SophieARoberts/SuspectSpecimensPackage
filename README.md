@@ -88,7 +88,7 @@ This analysis finds species which only have a specified number of collectors and
 ```
 SpeciesCollectors(ExampleDataFull$SCIENTIFICNAME, 3, ExampleDataFull$COLLECTOR1, ExampleDataFull$COLLECTOR2, ExampleDataFull$COLLECTOR3, ExampleDataFull$COLLECTOR4)
 ```
-This function requires the arguments `SpecimenColumn` and `NoCollectors` which is the column with the specimen names and the specified number of collectors (default is 1) It also requires any columns that contain collector names. *The specimen name can either include authors or not*. Collector names should all be in the same format.
+This function requires the arguments `SpecimenColumn` and `NoCollectors` which is the column with the specimen names and the specified number of collectors. It also requires any columns that contain collector names. *The specimen name can either include authors or not*. Collector names should all be in the same format.
 
 ## 3. Orphan Species & Specimens
 

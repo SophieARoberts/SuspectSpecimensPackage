@@ -29,30 +29,33 @@ SpeciesCollectors <- function(SpecimenColumn, NoCollectors = 1, ...) {
   CheckSpecies <- OnlySpecies$SpecimenColumn
   CheckSpecimen <- CollectorData$SpecimenColumn
   print(paste("Number of species:", nrow(OnlySpecies)))
-  CollectorList <- NA
+  CollectorList <<- NA
   
   for (CheckSpecies in 1:nrow(OnlySpecies)) {
+    CollectorList <<- NA
     Species <- OnlySpecies[CheckSpecies, "SpecimenColumn"]
     print(paste("Species:", CheckSpecies, Species))
-    CollectorList <- NA
     for (CheckSpecimen in 1:nrow(CollectorData)) {
       Specimen <- CollectorData[CheckSpecimen, "SpecimenColumn"]
       if (Specimen == Species) {
-        for(c in 1:ncol(CollectorData)) {
-          CollectorList <- append(CollectorList, 
+        for(c in 2:ncol(CollectorData)) {
+          CollectorList <<- append(CollectorList, 
                                  CollectorData[c][CheckSpecimen, ])
         }
       }
     }
-    CollectorList <- sort(CollectorList)
-    CollectorList <- data.frame(CollectorList)
-    CollectorList <- CollectorList %>% distinct()
+    CollectorList <<- sort(unlist(CollectorList))
+    CollectorList <<- data.frame(CollectorList)
+    print(CollectorList)
+    CollectorList <<- CollectorList %>% distinct()
     RemoveBlanks <- grepl(" ", CollectorList$CollectorList)
-    CollectorList <- CollectorList %>% filter(RemoveBlanks)
+    CollectorList <<- CollectorList %>% filter(RemoveBlanks)
     CollectorListLength <- nrow(CollectorList)
+    #print(CollectorListLength)
+    #print(NoCollectors)
     if(CollectorListLength <= NoCollectors) {
-      CollectorList <- as.list(CollectorList)
-      GetCollectors[N, ] <<- list(Species, CollectorList)
+      FinalCollectorList <- as.list(CollectorList)
+      GetCollectors[N, ] <<- list(Species, FinalCollectorList)
       N <- N + 1
     }
   }
