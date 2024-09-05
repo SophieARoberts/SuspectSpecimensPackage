@@ -46,7 +46,6 @@ SpeciesCollectors <- function(SpecimenColumn, NoCollectors = 1, ...) {
     }
     CollectorList <<- sort(unlist(CollectorList))
     CollectorList <<- data.frame(CollectorList)
-    print(CollectorList)
     CollectorList <<- CollectorList %>% distinct()
     RemoveBlanks <- grepl(" ", CollectorList$CollectorList)
     CollectorList <<- CollectorList %>% filter(RemoveBlanks)
