@@ -62,7 +62,7 @@ UploadCensus(ExampleCensusData$Name, ExampleCensusData$VC_printed)
 This function requires `CensusSpecies` which is the column with the species names in the census data and `CensusVC` which is the column with the vice county numbers in the census data.
 
 And then use instead the function `DistributionMap` which will produce a distribution map for your data and for the census data. This function works in the exact same way as `DistributionMapNoCensus` (see above).
-**The scientific name used in your data must be the same as that of the census data**.
+**The scientific name used in your data must be the same as that of the census data**. If the Census Data map is blank then the species name was not found in the census data.
 *The name can either include authors or not*.
 
 ```
@@ -88,7 +88,7 @@ This analysis finds species which only have a specified number of collectors and
 ```
 SpeciesCollectors(ExampleDataFull$SCIENTIFICNAME, 3, ExampleDataFull$COLLECTOR1, ExampleDataFull$COLLECTOR2, ExampleDataFull$COLLECTOR3, ExampleDataFull$COLLECTOR4)
 ```
-This function requires the arguments `SpecimenColumn` and `NoCollectors` which is the column with the specimen names and the specified number of collectors (default is 1) It also requires any columns that contain collector names. *The specimen name can either include authors or not*. Collector names should all be in the same format.
+This function requires the arguments `SpecimenColumn` and `NoCollectors` which is the column with the specimen names and the specified number of collectors. It also requires any columns that contain collector names. *The specimen name can either include authors or not*. Collector names should all be in the same format.
 
 ## 3. Orphan Species & Specimens
 
