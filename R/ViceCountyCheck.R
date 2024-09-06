@@ -165,10 +165,9 @@ DistributionMap <- function(Record = 1) {
       SpeciesNameCensus <- iconv(SpeciesName, from = "ISO-8859-1", to = "UTF-8")
       SplitName <- strsplit(SpeciesNameCensus, split = " ")
       SpeciesNameSimple <- paste(SplitName[[1]][1], SplitName[[1]][2])
-      
       GetData <<- filter(FilterZeros, FilterZeros$Specimen == SpeciesName)
       dataCensus <<- filter(CensusData, CensusData$Name == SpeciesNameSimple)
-      colnames(GetData)[2] <- "id"
+      colnames(GetData)[2] <<- "id"
       colnames(MapData)[7] <- "id"
       colnames(dataCensus)[2] <<- "id"
       #GetData$id <- as.numeric(as.character(GetData$id))
