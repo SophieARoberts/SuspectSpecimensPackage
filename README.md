@@ -62,7 +62,7 @@ UploadCensus(ExampleCensusData$Name, ExampleCensusData$VC_printed)
 This function requires `CensusSpecies` which is the column with the species names in the census data and `CensusVC` which is the column with the vice county numbers in the census data.
 
 And then use instead the function `DistributionMap` which will produce a distribution map for your data and for the census data. This function works in the exact same way as `DistributionMapNoCensus` (see above).
-**The scientific name used in your data must be the same as that of the census data**.
+**The scientific name used in your data must be the same as that of the census data**. If the Census Data map is blank then the species name was not found in the census data.
 *The name can either include authors or not*.
 
 ```
